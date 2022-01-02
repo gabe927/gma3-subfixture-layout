@@ -35,6 +35,22 @@ function main4()
     seq.name = "asdf"
 end
 
+function main5()
+    DataPool().Layouts[1][6] = DataPool().Layouts[1][5]
+    l = DataPool().Layouts
+    l1 = l:Children()[1]
+    l2 = l:Children()[2]
+    l15 = l1:Children()[5]
+    l21 = l2:Children()[1]
+    subfix = l21:Get("Object")[1]:ToAddr()
+    c("Assign " .. subfix .. "At Layout 3.2 Property \"OBJECT\"")
+    l[1][5].posx = -20
+    l[1][5].Name = "asdf"
+    l[1][5].id = 3
+    p(Count(l15))
+    printChildren(l1)
+end
+
 function printChildren(o)
     Printf(type(o))
     Printf(dump(o))
