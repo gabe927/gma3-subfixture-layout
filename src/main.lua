@@ -101,12 +101,15 @@ local function newLayout(layoutNum)
     c("Store Layout " .. layoutNum)
 end
 
-local function assignElement(fixID, elemNum)
-    
+local function assignElement(layoutNum, fixID)
+    c("Assign Fixture " .. fixID .. " At Layout " .. layoutNum)
 end
 
-local function posElement()
-    
+local function posElement(handle, x, y, h, w)
+    handle.posx = x
+    handle.posy = y
+    handle.positionh = h
+    handle.positionw = w
 end
 
 local function main()
@@ -133,6 +136,22 @@ local function main()
     end
 
     -- assign new elements
+    c("Select Layout " .. dest_layout) -- view the new layout cause I like to watch it build :)
+    local destLayoutHandle = DataPool().Layouts[dest_layout]
+    for i=1, #mainElements do
+        for j=1, #templateElements do
+            -- assign the element
+            local fixID = tostring((mainElements[i]["id"])) .. templateElements[j]["id"]
+            assignElement(dest_layout, fixID)
+            -- position the element
+            local elementHandle = destLayoutHandle[#destLayoutHandle]
+            local x = (mainElements[i]["posx"] * scaling_factor) + templateElements[j]["posx"]
+            local y = (mainElements[i]["posy"] * scaling_factor) + templateElements[j]["posy"]
+            local h = templateElements[j]["height"]
+            local w = templateElements[j]["width"]
+            posElement(elementHandle, x, y, h, w)
+        end
+    end
 end
 
 return main
