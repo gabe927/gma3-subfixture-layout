@@ -10,11 +10,9 @@ template_layout = 3
 dest_layout = 4
 scaling_factor = 6
 overwrite_enabled = false
--- (for future morphing) {
-flip_x = false
-flip_y = false
-rotate_90 = false
--- }
+mirror_xy = true -- mirrors the template along a y=x axix
+mirror_x = false -- mirrors the template along the x axis
+mirror_y = false -- mirrors the template along the y axis
 
 -- Other global variables
 c = Cmd
@@ -89,6 +87,33 @@ local function normalize(elements, param)
     end
 end
 
+local function flipAxis(elements, axisKey, offsetKey)
+    -- add offset and negate values
+    for i=1, #elements do
+        local e = elements[i]
+        e[axisKey] = -1 * (e[axisKey] + e[offsetKey])
+    end
+
+    -- normalize
+    normalize(elements, axisKey)
+end
+
+local function swapXY(elements)
+    for i=1, #elements do
+        local e = elements[i]
+        local tempX = e["posx"]
+        e["posx"] = e["posy"]
+        e["posy"] = tempX
+        local tempHeight = e["height"]
+        e["height"] = e["width"]
+        e["width"] = tempHeight
+    end
+
+    -- normalize
+    normalize(elements, "posx")
+    normalize(elements, "posy")
+end
+
 local function doesLayoutExist(layoutNum)
     local l = ObjectList("Layout " .. layoutNum)
     return (#l >= 1)
@@ -114,11 +139,6 @@ local function posElement(handle, x, y, h, w)
 end
 
 local function main()
-    -- reset the destination layout
-    -- c("ClearAll")
-    -- removeLayout()
-    -- newLayout()
-
     -- get fixID of selected elements in source layout
     local mainElements = getSouceElements()
 
@@ -129,7 +149,19 @@ local function main()
     normalize(templateElements, "posx")
     normalize(templateElements, "posy")
 
-    -- morph tempate elemets (for future use)
+    -- morph tempate elemets
+    -- rotate 90
+    if (mirror_xy) then
+        swapXY(templateElements)
+    end
+    -- x axis
+    if (mirror_x) then
+        flipAxis(templateElements, "posx", "width")
+    end
+    -- y axis
+    if (mirror_y) then
+        flipAxis(templateElements, "posy", "height")
+    end
 
     -- remove destination layout if overwrite enabled
     if (overwrite_enabled) then
