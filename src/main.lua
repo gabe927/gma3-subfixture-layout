@@ -6,35 +6,79 @@
 
 -- User settings --
 source_layout = 2
-dest_layout = 3
-
+template_layout = 3
+dest_layout = 4
+scaling_factor = 6
+-- (for future morphing) {
 flip_x = false
 flip_y = false
 rotate_90 = false
-
--- Fixture functions --
-scaling_factor = 6
-cells = {
-    {
-        x_offset = 0,
-        y_offset = 0,
-        height = 50,
-        width = 50,
-        subfix = "1.1"
-    }
-}
+-- }
 
 -- Other global variables
 c = Cmd
 p = Printf
 
 -- Layout builder functions --
+local function twosCompToInt(val)
+    if (val > 32767) then
+        return val - 65536
+    else
+        return val
+    end
+end
+
+local function getSubfixIdFromLayoutElement(o)
+        id = o:Get("Object"):ToAddr() -- returns "Fixture (id).(subid).(subid)..."
+        -- remove "Fixture "
+        id = string.sub(id, 9, -1)
+        -- remove main fixID before first "."
+        while ((string.byte(id) ~= string.byte('.')) and (#id > 2)) do -- Reasons why I don't like lua... You can't reference a string as an array.
+            id = string.sub(id, 2, -1)
+        end
+        return id
+end
+
 local function removeLayout()
     c("Delete Layout " .. dest_layout)
 end
 
 local function newLayout()
     c("Store Layout " .. dest_layout)
+end
+
+local function getSouceElements()
+    local l = DataPool().Layouts[source_layout]
+    local elements = {}
+    for i = 1, #l do
+        if (l[i].selected and (l[i].assignType == "Fixture")) then
+            local e = {
+                id = l[i].id,
+                posx = twosCompToInt(l[i].posx),
+                posy = twosCompToInt(l[i].posy)
+            }
+            table.insert(elements, e)
+        end
+    end
+    return elements
+end
+
+local function getTemplateElemets()
+    local l = DataPool().Layouts[template_layout]
+    local elements = {}
+    for i = 1, #l do
+        if (l[i].selected and (l[i].assignType == "Fixture")) then
+            local e = {
+                id = getSubfixIdFromLayoutElement(l[i]),
+                posx = twosCompToInt(l[i].posx),
+                posy = twosCompToInt(l[i].posy),
+                height = l[i].positionh,
+                width = l[i].positionw
+            }
+            table.insert(elements, e)
+        end
+    end
+    return elements
 end
 
 local function assignElement(fixID, elemNum)
@@ -47,15 +91,21 @@ end
 
 local function main()
     -- reset the destination layout
-    c("ClearAll")
-    removeLayout()
-    newLayout()
-    -- DataPool().Layouts[1][6] = DataPool().Layouts[1][5]
-    l = DataPool().Layouts
-    p(l[1][5].object)
-    l[1][5].posx = 20
-    l[1][5].name = "asdf"
-    l[1][5].id = 3
+    -- c("ClearAll")
+    -- removeLayout()
+    -- newLayout()
+
+    -- get fixID of selected elements in source layout
+    local mainElements = getSouceElements()
+
+    -- get elements of template
+    local templateElements = getTemplateElemets()
+
+    -- normalize tempate element positions
+
+    -- morph tempate elemets (for future use)
+
+    -- assign new elements
 end
 
 return main
