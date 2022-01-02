@@ -75,7 +75,7 @@ end
 
 local function normalize(elements, param)
     -- find lowest value
-    lowVal = elements[1][param]
+    local lowVal = elements[1][param]
     for i = 2, #elements do
         if (elements[i][param] < lowVal) then
             lowVal = elements[i][param]
