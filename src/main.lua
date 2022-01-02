@@ -1,18 +1,25 @@
 ------------------------------------
 --                                --
 -- JDC1 Subfixture Layout Builder --
+--      By Gabe Odachowski        --
 --                                --
 ------------------------------------
 
--- User settings --
-source_layout = 2
-template_layout = 3
-dest_layout = 4
-scaling_factor = 6
-overwrite_enabled = false
+---------------------------------
+-- EDIT THE USER SETTINGS HERE --
+---------------------------------
+source_layout = 2 -- Layout with main fixtures
+template_layout = 3 -- Layout with template elements
+dest_layout = 4 -- Layout to store to
+scaling_factor = 6 -- Scales the position values
+overwrite_enabled = false -- Overwrite destination layout
 mirror_xy = true -- mirrors the template along a y=x axix
 mirror_x = false -- mirrors the template along the x axis
 mirror_y = false -- mirrors the template along the y axis
+
+------------------------------------------
+-- DON'T EDIT ANYTHING BELOW THIS POINT --
+------------------------------------------
 
 -- Other global variables
 c = Cmd
