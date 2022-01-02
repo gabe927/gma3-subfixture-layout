@@ -81,6 +81,21 @@ local function getTemplateElemets()
     return elements
 end
 
+local function normalize(elements, param)
+    -- find lowest value
+    lowVal = elements[1][param]
+    for i = 2, #elements do
+        if (elements[i][param] < lowVal) then
+            lowVal = elements[i][param]
+        end
+    end
+
+    -- normalize
+    for i = 1, #elements do
+        elements[i][param] = elements[i][param] - lowVal
+    end
+end
+
 local function assignElement(fixID, elemNum)
     
 end
@@ -102,6 +117,8 @@ local function main()
     local templateElements = getTemplateElemets()
 
     -- normalize tempate element positions
+    normalize(templateElements, "posx")
+    normalize(templateElements, "posy")
 
     -- morph tempate elemets (for future use)
 
