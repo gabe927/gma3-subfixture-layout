@@ -39,14 +39,6 @@ local function getSubfixIdFromLayoutElement(o)
         return id
 end
 
-local function removeLayout()
-    c("Delete Layout " .. dest_layout)
-end
-
-local function newLayout()
-    c("Store Layout " .. dest_layout)
-end
-
 local function getSouceElements()
     local l = DataPool().Layouts[source_layout]
     local elements = {}
@@ -96,6 +88,19 @@ local function normalize(elements, param)
     end
 end
 
+local function doesLayoutExist(layoutNum)
+    local l = ObjectList("Layout " .. layoutNum)
+    return (#l >= 1)
+end
+
+local function removeLayout(layoutNum)
+    c("Delete Layout " .. layoutNum)
+end
+
+local function newLayout(layoutNum)
+    c("Store Layout " .. layoutNum)
+end
+
 local function assignElement(fixID, elemNum)
     
 end
@@ -121,6 +126,11 @@ local function main()
     normalize(templateElements, "posy")
 
     -- morph tempate elemets (for future use)
+
+    -- Check if destination layout exists
+    if (not doesLayoutExist(dest_layout)) then
+        newLayout(dest_layout)
+    end
 
     -- assign new elements
 end
