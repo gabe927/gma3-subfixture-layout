@@ -9,6 +9,7 @@ source_layout = 2
 template_layout = 3
 dest_layout = 4
 scaling_factor = 6
+overwrite_enabled = false
 -- (for future morphing) {
 flip_x = false
 flip_y = false
@@ -130,7 +131,12 @@ local function main()
 
     -- morph tempate elemets (for future use)
 
-    -- Check if destination layout exists
+    -- remove destination layout if overwrite enabled
+    if (overwrite_enabled) then
+        removeLayout(dest_layout)
+    end
+
+    -- create new destination layout if it doesn't exist
     if (not doesLayoutExist(dest_layout)) then
         newLayout(dest_layout)
     end
