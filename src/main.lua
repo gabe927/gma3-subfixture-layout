@@ -163,11 +163,11 @@ local function main()
     end
     -- x axis
     if (mirror_x) then
-        flipAxis(templateElements, "posy", "width")
+        flipAxis(templateElements, "posy", "height")
     end
     -- y axis
     if (mirror_y) then
-        flipAxis(templateElements, "posx", "height")
+        flipAxis(templateElements, "posx", "width")
     end
 
     -- remove destination layout if overwrite enabled
