@@ -1,9 +1,19 @@
-------------------------------------
---                                --
--- JDC1 Subfixture Layout Builder --
---      By Gabe Odachowski        --
---                                --
-------------------------------------
+----------------------------------------
+--                                    --
+-- GrandMA3 Subfixture Layout Builder --
+--         By Gabe Odachowski         --
+--                                    --
+----------------------------------------
+
+-- This plugin takes the main fixtures in a layout view and replaces (by creating a new layout view)
+-- those elements with a provided subfixture template.
+-- 
+-- This project is open source. Feel free to fork the code and be sure to submit any revisions or
+-- issues to the project's Github page found here: https://github.com/gabe927/gma3-subfixture-layout
+-- 
+-- As always, please don't be a dick. If you use this code on your own projects, credit the source!
+-- 
+-- Instructions for how to use the plugin can be found on the Github page.
 
 ---------------------------------
 -- EDIT THE USER SETTINGS HERE --
@@ -13,7 +23,7 @@ template_layout = 3 -- Layout with template elements
 dest_layout = 4 -- Layout to store to
 scaling_factor = 6 -- Scales the position values
 overwrite_enabled = false -- Overwrite destination layout
-mirror_xy = true -- mirrors the template along a y=x axix
+mirror_xy = false -- mirrors the template along a y=x axix
 mirror_x = false -- mirrors the template along the x axis
 mirror_y = false -- mirrors the template along the y axis
 
