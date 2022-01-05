@@ -60,6 +60,13 @@ Note that the plugin uses the regular "Assign" keyword when creating the element
 
 ![alt text](https://raw.githubusercontent.com/gabe927/gma3-subfixture-layout/master/images/JDC1-Destination-Layout.png "JDC Destination Layout")
 
+## Video Instructions
+All of those instructions from above in video format:
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=wX8inv88hkk
+" target="_blank"><img src="http://img.youtube.com/vi/wX8inv88hkk/0.jpg" 
+alt="GrandMA3 Subfixture Layout View Builder" width="240" height="180" border="10" /></a>
+
 ## Other Notes
 This project is open source. Feel free to fork the project, try your own stuff, and add a pull request. Your changes might get added!
 
