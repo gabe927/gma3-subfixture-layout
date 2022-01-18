@@ -4,9 +4,12 @@ This plugin for GrandMA3 takes the main fixture instances in a layout view and r
 
 ![alt text](https://raw.githubusercontent.com/gabe927/gma3-subfixture-layout/master/images/overview.png)
 
-## Usage Instructions
+## Change Log
 
+V 1.1 - January 17, 2021 - Added Subfix Groups
 V 1.0 - January 4, 2021
+
+## Usage Instructions
 
 ### Step 1: Setup Layout Views
 ---
@@ -43,6 +46,9 @@ At the top of the plugin, there are some parameters that are user-editable. Thes
 | source_layout | Layout pool number with the main fixture elements |
 | template_layout | Layout pool number with the template elements |
 | dest_layout | Destination layout pool number for the new elements |
+| groups_pool_start | Groups pool number to start storing subfix groups (one per element in template, will overwrite existing!) |
+| groups_layout | Layout to store the subfix group elements |
+| groups_prefix | Prefix to go at the beginning of each group |
 | scaling_factor | A multiplyer for the start position of the new elements. This is useful when the template is larger than the space between multiple main elements. |
 | mirror_xy | mirrors the template along the y=x axis |
 | mirror_x | mirrors the template along the x axis |
