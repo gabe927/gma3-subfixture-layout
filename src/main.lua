@@ -21,7 +21,10 @@
 source_layout = 2 -- Layout with main fixtures
 template_layout = 3 -- Layout with template elements
 dest_layout = 4 -- Layout to store to
-scaling_factor = 6 -- Scales the position values
+groups_pool_start = 11 -- Groups pool number to start storing subfix groups (one per element in template, will overwrite existing!)
+groups_layout = 5 -- Layout to store the subfix group elements
+groups_prefix = "JDC" -- Prefix to go at beginning of each group
+scaling_factor = 2 -- Scales the position values
 overwrite_enabled = false -- Overwrite destination layout
 mirror_xy = false -- mirrors the template along a y=x axix
 mirror_x = false -- mirrors the template along the x axis
@@ -144,8 +147,8 @@ local function newLayout(layoutNum)
     c("Store Layout " .. layoutNum)
 end
 
-local function assignElement(layoutNum, fixID)
-    c("Assign Fixture " .. fixID .. " At Layout " .. layoutNum)
+local function assignElement(type, id, layoutNum)
+    c("Assign " .. type .. " " .. id .. " At Layout " .. layoutNum)
 end
 
 local function posElement(handle, x, y, h, w)
@@ -153,6 +156,25 @@ local function posElement(handle, x, y, h, w)
     handle.posy = y
     handle.positionh = h
     handle.positionw = w
+end
+
+-- Group functions
+local function removeGroup(num)
+    c("Delete Group " .. num)
+end
+
+local function appendToGroup(fixID, groupNum)
+    c("ClearAll")
+    c("Fixture " .. fixID)
+    c("Store Group ".. groupNum .. " /m")
+end
+
+local function renameGroup(groupNum, name)
+    c("Label Group " .. groupNum .. " \"" .. name .. "\"")
+end
+
+local function replaceCharInString(fromChar, toChar, str)
+    
 end
 
 local function main()
@@ -180,9 +202,10 @@ local function main()
         flipAxis(templateElements, "posx", "width")
     end
 
-    -- remove destination layout if overwrite enabled
+    -- remove layouts if overwrite enabled
     if (overwrite_enabled) then
         removeLayout(dest_layout)
+        removeLayout(groups_layout)
     end
 
     -- create new destination layout if it doesn't exist
@@ -190,14 +213,21 @@ local function main()
         newLayout(dest_layout)
     end
 
+    -- create new gropus layout if it doesn't exist
+    if (not doesLayoutExist(groups_layout)) then
+        newLayout(groups_layout)
+    end
+
     -- assign new elements
     c("Select Layout " .. dest_layout) -- view the new layout cause I like to watch it build :)
     local destLayoutHandle = DataPool().Layouts[dest_layout]
+    local groupsLayoutHandle = DataPool().Layouts[groups_layout]
     for i=1, #mainElements do
         for j=1, #templateElements do
+            -- SubFix Layout --
             -- assign the element
             local fixID = tostring((mainElements[i]["id"])) .. templateElements[j]["id"]
-            assignElement(dest_layout, fixID)
+            assignElement("Fixture", fixID, dest_layout)
             -- position the element
             local elementHandle = destLayoutHandle[#destLayoutHandle]
             local x = (mainElements[i]["posx"] * scaling_factor) + templateElements[j]["posx"]
@@ -205,8 +235,33 @@ local function main()
             local h = templateElements[j]["height"]
             local w = templateElements[j]["width"]
             posElement(elementHandle, x, y, h, w)
+
+            -- Groups --
+            local groupNum = groups_pool_start + j - 1
+            -- delete existing group if i=1
+            if ((i == 1) and overwrite_enabled) then
+                removeGroup(groupNum)
+            end
+            -- append subfix in respective group
+            appendToGroup(fixID, groupNum)
+            if (i == 1) then
+                -- rename group
+                local groupName = groups_prefix .. templateElements[j]["id"]
+                groupName = groupName:gsub("%.", "-") -- replace . with - because labels don't work with .
+                renameGroup(groupNum, groupName)
+                -- assign element
+                assignElement("Group", groupNum, groups_layout)
+                -- position element
+                elementHandle = groupsLayoutHandle[#groupsLayoutHandle]
+                x = templateElements[j]["posx"]
+                y = templateElements[j]["posy"]
+                -- h = templateElements[j]["height"] redundant from above, but you get the idea
+                -- w = templateElements[j]["width"]
+                posElement(elementHandle, x, y, h, w)
+            end
         end
     end
+    c("ClearAll")
 end
 
 return main
