@@ -6,8 +6,11 @@ This plugin for GrandMA3 takes the main fixture instances in a layout view and r
 
 ## Change Log
 
-V 1.1 - January 17, 2021 - Added Subfix Groups
-V 1.0 - January 4, 2021
+| Plugin Version | Date | Notes |
+| --- | --- | --- |
+| | January 18, 2022 | Added note to Readme about GMA3 V1.8 |
+| V 1.1 | January 17, 2021 | Added Subfix Groups |
+| V 1.0 | January 4, 2021 | Original Release |
 
 ## Usage Instructions
 
@@ -25,11 +28,15 @@ Here I have an example with 2 JDC1s:
 
 ### Step 2: Select Elements
 ---
-The plugin will only use the selected elements in both the main and template layouts. NOTE that this does NOT mean selected in the programmer, it means the selected elements in the layout view. You can see which elements are selected in the Edit sheet for the layout.
+The plugin will only use the selected elements in both the main and template layouts. 
+
+**Before GMA3 V1.8:** NOTE that this does NOT mean selected in the programmer, it means the selected elements in the layout view. You can see which elements are selected in the Edit sheet for the layout.
 
 ![alt text](https://raw.githubusercontent.com/gabe927/gma3-subfixture-layout/master/images/Layout-Selected-Elements.png "Selected Layout Elements")
 
 You can also select the elements while in "Setup" mode on the layout view and using the Select Tool. (Hold control while lassoing to add elements to the selection)
+
+**GMA3 V1.8 and above:** The "Selected" parameter in Layouts now follows the programmer's selection. Selecting layout elements using the sheet or Setup mode is no longer required. Simply select all the fixture elements the same way you would for normal programming. 
 
 This allows for control over which elements you wish to have processed by the plugin at a given time.
 
