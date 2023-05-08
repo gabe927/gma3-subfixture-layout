@@ -8,10 +8,18 @@ This plugin for GrandMA3 takes the main fixture instances in a layout view and r
 
 | Plugin Version | Date | Notes |
 | --- | --- | --- |
+| | May 7, 2023 | Added note about new features included in MA V1.9 |
 | | February 1, 2023 | Changed note to Readme about GMA V1.8 because of incorrect information |
 | | January 18, 2023 | Added note to Readme about GMA3 V1.8 |
 | V 1.1 | January 17, 2022 | Added Subfix Groups |
 | V 1.0 | January 4, 2022 | Original Release |
+
+## GrandMA3 Version 1.9
+---
+GrandMA3 version 1.9 adds a feature which may eliminate the need for this plugin entirely!
+The 3D view adds a button "3D view to Selection Grid tool" whcih can be used to create 3D selections via any camera angle in the 3D view. It even works for subfixtures!
+
+For more info about this feature, check out this section in the release notes: <a href="https://help2.malighting.com/Page/grandMA3/releasenotes/en/1.9#toc_header_anchor_18" target="_blank">https://help2.malighting.com/Page/grandMA3/releasenotes/en/1.9#toc_header_anchor_18</a>
 
 ## Usage Instructions
 
