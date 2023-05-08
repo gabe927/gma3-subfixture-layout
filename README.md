@@ -19,7 +19,7 @@ This plugin for GrandMA3 takes the main fixture instances in a layout view and r
 GrandMA3 version 1.9 adds a feature which may eliminate the need for this plugin entirely!
 The 3D view adds a button "3D view to Selection Grid tool" which can be used to create 3D selections via any camera angle in the 3D view. It even works for subfixtures!
 
-For more info about this feature, check out this section in the release notes: <a href="https://help2.malighting.com/Page/grandMA3/releasenotes/en/1.9#toc_header_anchor_18" target="_blank">https://help2.malighting.com/Page/grandMA3/releasenotes/en/1.9#toc_header_anchor_18</a>
+For more info about this feature, check out this section in the release notes: <a href="https://help2.malighting.com/Page/grandMA3/releasenotes/en/1.9#toc_header_anchor_18:~:text=To%20generate%20grid,the%20Selection%20Grid." target="_blank">https://help2.malighting.com/Page/grandMA3/releasenotes/en/1.9#toc_header_anchor_18:~:text=To%20generate%20grid,the%20Selection%20Grid.</a>
 
 ## Usage Instructions
 
